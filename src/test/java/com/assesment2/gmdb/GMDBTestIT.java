@@ -57,5 +57,4 @@ public class GMDBTestIT {
                 .andExpect(jsonPath("[0].movieName").value("Movie Name 1"));
 
     }
-
 }
