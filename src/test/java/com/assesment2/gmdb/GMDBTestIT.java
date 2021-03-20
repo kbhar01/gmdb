@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.File;
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class GMDBTestIT {
 
     @Autowired
@@ -76,6 +78,20 @@ public class GMDBTestIT {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Steel"));
+    }
+
+    @Test
+    public void getMovieDetailsForNonExistingTitle() throws Exception {
+        List<MovieDTO> movieDTO = convertToDtoClassFromTestMoviesJson();
+
+        mockMVC.perform(post("/gmdb/movies")
+                .content(objectMapper.writeValueAsString(movieDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        mockMVC.perform(get("/gmdb/movies/Steel22")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
     }
 
 
