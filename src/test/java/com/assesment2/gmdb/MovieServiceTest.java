@@ -68,7 +68,6 @@ public class MovieServiceTest {
         assertEquals(movieList.get(3).title, "Unbreakable");
     }
 
-
     private List<MovieEntity> convertToEntityClassFromTestMoviesJson() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
