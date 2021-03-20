@@ -52,7 +52,7 @@ public class MovieServiceTest {
             this.convertToEntityClassFromTestMoviesJson()
         );
         List<MovieDTO> movieList = subject.fetchAll();
-        assertEquals(movieList.size(), 3);
+        assertEquals(movieList.size(), 7);
         assertThat(movieList).isEqualTo(
                 this.convertToDtoClassFromTestMoviesJson()
         );
@@ -62,14 +62,16 @@ public class MovieServiceTest {
     private List<MovieEntity> convertToEntityClassFromTestMoviesJson() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("src/main/java/data/testmovies.json");
+        //File file = new File("src/main/java/data/testmovies.json");
+        File file = new File("src/main/java/data/movielist.json");
         return Arrays.asList(mapper.readValue(file, MovieEntity[].class));
     }
 
     private List<MovieDTO> convertToDtoClassFromTestMoviesJson() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("src/main/java/data/testmovies.json");
+        //File file = new File("src/main/java/data/testmovies.json");
+        File file = new File("src/main/java/data/movielist.json");
         return Arrays.asList(mapper.readValue(file, MovieDTO[].class));
     }
 

@@ -20,9 +20,28 @@ public class MovieEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long Id;
 
-    String movieName;
+    String title;
+    String director;
+    String actors;
+    String release;
+    String description;
+    String rating;
 
-    MovieEntity(String movieName) {
-        this.movieName = movieName;
+    MovieEntity(String title) {
+        this.title = title;
+    }
+
+    public MovieEntity(String title,
+                       String director,
+                       String actors,
+                       String release,
+                       String description,
+                       String rating) {
+        this.title = title;
+        this.director = director;
+        this.actors = actors;
+        this.release = release;
+        this.description = description;
+        this.rating = rating;
     }
 }

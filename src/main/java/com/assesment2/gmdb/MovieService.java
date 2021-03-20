@@ -18,7 +18,12 @@ public class MovieService {
 
     public void create(MovieDTO movieDto) {
         movieRepository.save(
-                new MovieEntity(movieDto.getMovieName())
+                new MovieEntity(movieDto.getTitle(),
+                        movieDto.getDirector(),
+                        movieDto.getActors(),
+                        movieDto.getRelease(),
+                        movieDto.getDescription(),
+                        movieDto.getRating())
         );
     }
 
@@ -27,7 +32,12 @@ public class MovieService {
         return movieRepository.findAll()
                 .stream()
                 .map(movieEntity -> {
-                    return new MovieDTO(movieEntity.getMovieName());
+                    return new MovieDTO(movieEntity.getTitle(),
+                            movieEntity.getDirector(),
+                            movieEntity.getActors(),
+                            movieEntity.getRelease(),
+                            movieEntity.getDescription(),
+                            movieEntity.getRating());
                 })
                 .collect(Collectors.toList());
 

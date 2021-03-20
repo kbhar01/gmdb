@@ -54,7 +54,6 @@ public class GMDBTestIT {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(1))
-                .andExpect(jsonPath("[0].movieName").value("Movie Name 1"));
-
+                .andExpect(jsonPath("[0].title").value("Movie Name 1"));
     }
 }
