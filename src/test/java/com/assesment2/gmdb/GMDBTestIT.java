@@ -42,4 +42,20 @@ public class GMDBTestIT {
                 .andExpect(jsonPath("length()").value(0));
     }
 
+    @Test
+    public void addAndListMovies() throws Exception {
+        MovieDTO movieDTO = new MovieDTO("Movie Name 1");
+        mockMVC.perform(post("/gmdb/movies")
+                .content(objectMapper.writeValueAsString(movieDTO))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+        mockMVC.perform(get("/gmdb/movies")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(1))
+                .andExpect(jsonPath("[0].movieName").value("Movie Name 1"));
+
+    }
+
 }
