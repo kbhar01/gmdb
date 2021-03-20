@@ -3,6 +3,9 @@ package com.assesment2.gmdb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 
 public class MovieService {
@@ -20,4 +23,13 @@ public class MovieService {
     }
 
 
+    public List<MovieDTO> fetchAll() {
+        return movieRepository.findAll()
+                .stream()
+                .map(movieEntity -> {
+                    return new MovieDTO(movieEntity.getMovieName());
+                })
+                .collect(Collectors.toList());
+
+    }
 }
