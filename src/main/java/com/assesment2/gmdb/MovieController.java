@@ -12,6 +12,12 @@ public class MovieController {
 
     List<MovieDTO> listOfMovies = new ArrayList<MovieDTO>();
 
+    @RequestMapping(value="/movies", method= RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<MovieDTO> getMovies() {
+        return this.listOfMovies;
+    }
+
     @RequestMapping(value="/movies", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void addMovie(@RequestBody MovieDTO movieDTO) {
