@@ -58,6 +58,16 @@ public class MovieServiceTest {
         );
     }
 
+    @Test
+    void fetchMovieDetailsFromList() throws Exception{
+        when(mockRepository.findAll()).thenReturn(
+                this.convertToEntityClassFromTestMoviesJson()
+        );
+        List<MovieDTO> movieList = subject.fetchAll();
+        assertEquals(movieList.size(), 7);
+        assertEquals(movieList.get(3).title, "Unbreakable");
+    }
+
 
     private List<MovieEntity> convertToEntityClassFromTestMoviesJson() throws Exception {
 
